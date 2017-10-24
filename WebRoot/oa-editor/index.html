@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>编辑器页面 - 计算机学院办公系统</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <script type="text/javascript" charset="utf-8" src="ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="ueditor.all.min.js"> </script>
+    <script type="text/javascript" charset="utf-8" src="lang/zh-cn/zh-cn.js"></script>
+    
+    <!-- Bootstrap core CSS -->
+    <link href="../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../lib/custom/starter-template.css" rel="stylesheet">
+    <link href="../lib/custom/sticky-footer.css" rel="stylesheet">
+    
+    <script type="text/javascript" src="./index.js"></script>
+    
+    <style type="text/css">
+        div{
+            width:100%;
+        }
+    </style>
+</head>
+<body>
+<div>
+
+    <!-- 左上角导航栏 -->
+            <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+                <a class="navbar-brand" href="#">计算机学院办公系统</a>
+                <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="./">发布文章<span class="sr-only">(current)</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            
+    <!--     中央主要标题 -->
+            
+            <div class="container">
+                <div class="starter-template">
+                    <h1>文章编辑器</h1>
+                </div>
+                
+                <div role="main">
+            <div class="page-content container clearfix">
+    <script id="editor" type="text/plain" style="width:1024px;height:300px;"></script>
+</div>
+
+    <div class="container">
+        <button type="button" class="btn btn-normal" onclick="getContent()" data-toggle="modal" data-target="#preview-model">预览</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#saveSuccess-model">发表</button>
+    </div>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="saveSuccess-model" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">提示</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="preview">
+                    发表成功
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="preview-model" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">文章预览</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="preview">
+                <p>kkkk</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    
+    <script src="../lib/angular.min.js"></script>
+    <script src="../lib/popper.min.js"></script>
+    <script src="../lib/jquery-3.2.1.min.js"></script>
+    <script src="../lib/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
