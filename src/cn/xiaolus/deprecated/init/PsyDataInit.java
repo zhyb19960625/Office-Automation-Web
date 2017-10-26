@@ -29,8 +29,8 @@ public class PsyDataInit {
 			String name = row.getCell(1).getStringCellValue();
 			String personid = row.getCell(2).getStringCellValue();
 			String psypasswd = row.getCell(3).getStringCellValue();
-//			System.out.println(schoolid+" "+name+" "+personid+" "+psypasswd);
-//			service.initPsyInfo(schoolid, name, personid, psypasswd);
+			System.out.println(schoolid+" "+name+" "+personid+" "+psypasswd);
+			service.initPsyInfo(schoolid, name, personid, psypasswd);
 		}
 		workbook.close();
 	}
