@@ -27,6 +27,6 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/apache-poi/poi-ooxml-schemas-3.16.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/apache-poi/poi-scratchpad-3.16.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/apache-poi/xmlbeans-2.6.0.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mysql/mariadb-java-client-2.1.2.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mysql/mysql-connector-java-8.0.8-dmr.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
