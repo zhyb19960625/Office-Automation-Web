@@ -167,7 +167,7 @@ public class ExcelFileSolver {
 		else if (targetFile.getName().endsWith(".xls")) {
 			Vector<Vector<String>> data = new Vector<Vector<String>>();
 //			HSSF系列类型中文件打开操作略有不同
-//			需要使用POIFileSystem类打开文件再传入HSSFWorkbook
+//			需要使用POIFSFileSystem类打开文件再传入HSSFWorkbook
 //			XSSF系列类型进行了简化，毕竟真的有点反人类......
 //			再次证明一个道理：不要用97-03的格式，程序员写程序都更麻烦
 			POIFSFileSystem fileSystem = new POIFSFileSystem(targetFile, true);
