@@ -1,6 +1,5 @@
 package org.csta.taoke.oa.database;
 
-import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;;
@@ -18,7 +17,7 @@ import java.sql.SQLException;;
 public class DataBaseConnector {
 	
 	private String dbDriverName;
-	private URL dbHost;
+	private String dbHost;
 	private String dbUser;
 	private char[] dbPassword;
 	private boolean isConnected;
@@ -31,7 +30,7 @@ public class DataBaseConnector {
 	 * @param user 数据库用户名
 	 * @param password 数据库密码
 	 */
-	public DataBaseConnector(String driver, URL host, String user, char[] password) {
+	public DataBaseConnector(String driver, String host, String user, char[] password) {
 		this.isConnected = false;
 		dbDriverName = driver;
 		dbHost = host;
@@ -47,7 +46,7 @@ public class DataBaseConnector {
 	public Connection connect() throws ClassNotFoundException, SQLException {
 		Class.forName(dbDriverName);
 		dbConnection = (Connection) DriverManager.getConnection (
-						dbHost.getHost(),
+						dbHost,
 						dbUser,
 						new String(dbPassword)
 				);
@@ -73,6 +72,15 @@ public class DataBaseConnector {
 	public void close() throws SQLException {
 		this.isConnected = false;
 		dbConnection.close();
+	}
+	
+	public static void main(String[] args) throws Exception {
+		DataBaseConnector connector1 = new DataBaseConnector("com.mysql.cj.jdbc.Driver", "jdbc:mysql://db.cstacauc.cn:3306", "csta_taoke_dev", "csta_taoke_dev_24092065".toCharArray());
+		connector1.connect();
+		connector1.close();
+		DataBaseConnector connector2 = new DataBaseConnector("com.mysql.cj.jdbc.Driver", "jdbc:mysql://sc.xiaolus.cn:3306", "csta_taoke_dev", "csta_taoke_dev_24092065".toCharArray());
+		connector2.connect();
+		connector2.close();
 	}
 }
 
