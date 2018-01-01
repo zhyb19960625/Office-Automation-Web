@@ -82,7 +82,7 @@ public class ExcelFileSolver {
 			HSSFWorkbook xls = new HSSFWorkbook();
 			HSSFSheet sheet = xls.createSheet();
 			int i = 0;
-			for ( Iterator<Vector<String>> rowIterator = data.iterator(); rowIterator.hasNext();++i) {
+			for (Iterator<Vector<String>> rowIterator = data.iterator(); rowIterator.hasNext();++i) {
 				Vector<String> vector = (Vector<String>) rowIterator.next();
 				HSSFRow row = sheet.createRow(i);
 				int j = 0;
@@ -120,6 +120,7 @@ public class ExcelFileSolver {
 //			从0开始迭代行
 //			从0开始的原因是，如果前面有空行，则存入向量之后空行效果将丢失
 			for (int i = 0; i <= sheet.getLastRowNum(); ++i) {
+//				System.out.println("Scanning Row "+i);
 //				保留数据开始之前的空行
 				if (i < sheet.getFirstRowNum()) {
 					data.add(null);
@@ -138,6 +139,10 @@ public class ExcelFileSolver {
 					}
 //					获得单元格对象
 					XSSFCell cell = row.getCell(j);
+					if (cell==null) {
+						rowData.add(null);
+						continue;
+					}
 //					判断单元格数据类型
 //					只支持文本类型和数字类型
 //					如果为文本类型单元格
@@ -148,12 +153,11 @@ public class ExcelFileSolver {
 					else if (cell.getCellTypeEnum().equals(CellType.NUMERIC)) {
 						rowData.add(Double.toString(cell.getNumericCellValue()));
 					}
-//					其他类型不被支持
+					else if (cell.getCellTypeEnum().equals(CellType.BLANK)) {
+						rowData.add("");
+					}
 					else {
-						rowData.clear();
-						data.clear();
-						xlsx.close();
-						throw new InvalidFormatException("不支持的单元格类型：仅支持文本和数字型");
+						continue;
 					}
 				}
 //				将一行数据添加到向量中
@@ -192,11 +196,11 @@ public class ExcelFileSolver {
 					else if (cell.getCellTypeEnum().equals(CellType.NUMERIC)) {
 						rowData.add(Double.toString(cell.getNumericCellValue()));
 					}
+					else if (cell.getCellTypeEnum().equals(CellType.BLANK)) {
+						rowData.add("");
+					}
 					else {
-						rowData.clear();
-						data.clear();
-						xls.close();
-						throw new InvalidFormatException("不支持的单元格类型：仅支持文本和数字型");
+						continue;
 					}
 				}
 				data.add(rowData);
@@ -207,13 +211,6 @@ public class ExcelFileSolver {
 		else {
 			throw new IllegalArgumentException("不是Excel文件后缀");
 		}
-	}
-	/**
-	 * 测试函数
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		System.out.println("Testing Import and Export Excel File ");
 	}
 }
 

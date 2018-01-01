@@ -73,14 +73,11 @@ public class DataBaseConnector {
 		this.isConnected = false;
 		dbConnection.close();
 	}
-	
-	public static void main(String[] args) throws Exception {
-		DataBaseConnector connector1 = new DataBaseConnector("com.mysql.cj.jdbc.Driver", "jdbc:mysql://db.cstacauc.cn:3306?useSSL=true", "csta_taoke_dev", "csta_taoke_dev_24092065".toCharArray());
-		connector1.connect();
-		connector1.close();
-		DataBaseConnector connector2 = new DataBaseConnector("com.mysql.cj.jdbc.Driver", "jdbc:mysql://sc.xiaolus.cn:3306", "csta_taoke_dev", "csta_taoke_dev_24092065".toCharArray());
-		connector2.connect();
-		connector2.close();
+	public static Connection getCSTADBConnection() throws Exception{
+		return new DataBaseConnector("com.mysql.cj.jdbc.Driver", "jdbc:mysql://db.cstacauc.cn?useSSL=true", "root", "XiaoLuMARIADB01291219".toCharArray()).connect();
+	}
+	public static Connection getAliyunDBConnection() throws Exception{
+		return new DataBaseConnector("com.mysql.cj.jdbc.Driver", "jdbc:mysql://sc.xiaolus.cn?useSSL=true", "root", "XiaoLuMARIADB01291219".toCharArray()).connect();
 	}
 }
 
