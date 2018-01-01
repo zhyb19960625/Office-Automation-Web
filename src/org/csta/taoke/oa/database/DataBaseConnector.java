@@ -75,7 +75,7 @@ public class DataBaseConnector {
 	}
 	
 	public static void main(String[] args) throws Exception {
-		DataBaseConnector connector1 = new DataBaseConnector("com.mysql.cj.jdbc.Driver", "jdbc:mysql://db.cstacauc.cn:3306", "csta_taoke_dev", "csta_taoke_dev_24092065".toCharArray());
+		DataBaseConnector connector1 = new DataBaseConnector("com.mysql.cj.jdbc.Driver", "jdbc:mysql://db.cstacauc.cn:3306?useSSL=true", "csta_taoke_dev", "csta_taoke_dev_24092065".toCharArray());
 		connector1.connect();
 		connector1.close();
 		DataBaseConnector connector2 = new DataBaseConnector("com.mysql.cj.jdbc.Driver", "jdbc:mysql://sc.xiaolus.cn:3306", "csta_taoke_dev", "csta_taoke_dev_24092065".toCharArray());
