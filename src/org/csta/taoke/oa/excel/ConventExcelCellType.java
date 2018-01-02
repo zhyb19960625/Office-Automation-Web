@@ -13,14 +13,31 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
+/**
+ * 功能：
+ * 转换Excel文件格式
+ * 
+ * 修订版本：
+ * 2018-01-01 首次编写，提供单元格类型转文本型的方法
+ * 
+ * @author 路伟饶
+ *
+ */
 public class ConventExcelCellType {
-	
 	private File sourceFile,targetFile;
+	/**
+	 * 构造方法
+	 * @param from 源文件
+	 * @param to 目的文件
+	 */
 	public ConventExcelCellType(File from, File to) {
 		this.sourceFile = from;
 		this.targetFile = to;
 	}
+	/**
+	 * 将Excel中的数值型单元格都转为文本型
+	 * @throws Exception
+	 */
 	public void conventToStringValue() throws Exception {
 //		目标文件类型为新版Microsoft Excel文件，使用XSSF系列类型
 		if (sourceFile.getName().endsWith(".xlsx")) {

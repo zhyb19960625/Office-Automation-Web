@@ -30,6 +30,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * 
  * 修订版本：
  * 2017-12-18 首次编写
+ * 2018-01-01 修正错误
  * 
  * @author 路伟饶
  *
@@ -120,7 +121,6 @@ public class ExcelFileSolver {
 //			从0开始迭代行
 //			从0开始的原因是，如果前面有空行，则存入向量之后空行效果将丢失
 			for (int i = 0; i <= sheet.getLastRowNum(); ++i) {
-//				System.out.println("Scanning Row "+i);
 //				保留数据开始之前的空行
 				if (i < sheet.getFirstRowNum()) {
 					data.add(null);
@@ -149,7 +149,9 @@ public class ExcelFileSolver {
 					if (cell.getCellTypeEnum().equals(CellType.STRING)) {
 						rowData.add(cell.getStringCellValue());
 					}
-//					数字类型单元格，也转化为文本类型存储
+//					数字类型单元格，也转化为文本类型存储，这里有可能会把长数字变为科学计数法
+//					如果要存储手机号，建议先看一下文件里单元格是不是文本型
+//					如果是数字型的话，建议使用ConventExcelCellType类进行转换
 					else if (cell.getCellTypeEnum().equals(CellType.NUMERIC)) {
 						rowData.add(Double.toString(cell.getNumericCellValue()));
 					}
