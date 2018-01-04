@@ -19,6 +19,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * 
  * 修订版本：
  * 2018-01-01 首次编写，提供单元格类型转文本型的方法
+ * 2018-01-04 更新Apache-POI版本到3.17
  * 
  * @author 路伟饶
  *

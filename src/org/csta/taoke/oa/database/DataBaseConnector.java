@@ -12,6 +12,7 @@ import java.sql.SQLException;;
  * 2017-12-17 首次编写
  * 2017-12-30 更改数据库密码
  * 2018-01-01 数据库增加SSL方式登录
+ * 2018-01-04 更改mysql驱动版本
  * 
  * @author 路伟饶
  * 
@@ -76,10 +77,10 @@ public class DataBaseConnector {
 		dbConnection.close();
 	}
 	public static Connection getCSTADBConnection() throws Exception{
-		return new DataBaseConnector("com.mysql.cj.jdbc.Driver", "jdbc:mysql://db.cstacauc.cn?useSSL=true", "root", "XiaoLuMARIADB01291219".toCharArray()).connect();
+		return new DataBaseConnector("com.mysql.jdbc.Driver", "jdbc:mysql://db.cstacauc.cn?useSSL=true", "root", "XiaoLuMARIADB01291219".toCharArray()).connect();
 	}
 	public static Connection getAliyunDBConnection() throws Exception{
-		return new DataBaseConnector("com.mysql.cj.jdbc.Driver", "jdbc:mysql://sc.xiaolus.cn?useSSL=true", "root", "XiaoLuMARIADB01291219".toCharArray()).connect();
+		return new DataBaseConnector("com.mysql.jdbc.Driver", "jdbc:mysql://sc.xiaolus.cn?useSSL=true", "root", "XiaoLuMARIADB01291219".toCharArray()).connect();
 	}
 }
 

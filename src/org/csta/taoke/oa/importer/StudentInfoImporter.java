@@ -4,7 +4,6 @@ import java.io.File;
 import java.sql.Connection;
 import java.util.Vector;
 
-import org.csta.taoke.oa.database.DataBaseConnector;
 import org.csta.taoke.oa.entity.Student;
 import org.csta.taoke.oa.excel.ExcelFileSolver;
 import org.csta.taoke.oa.service.StudentTableService;
@@ -14,6 +13,7 @@ import org.csta.taoke.oa.service.StudentTableService;
  * 
  * 修订版本
  * 2018-01-01 首次编写
+ * 2018 01-04 去除多余import
  * 
  * @author 路伟饶
  *
@@ -25,9 +25,9 @@ public class StudentInfoImporter {
 	 * 构造方法
 	 * @param file 有学生信息的Excel文件，要求单元格都是文本型
 	 */
-	public StudentInfoImporter(File file) {
+	public StudentInfoImporter(Connection connection,File file) {
 		try {
-			connection = DataBaseConnector.getCSTADBConnection();
+			this.connection = connection;
 			solver = new ExcelFileSolver(file);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -62,9 +62,4 @@ public class StudentInfoImporter {
 			System.out.println();
 		}
 	}
-	
-	public static void main(String[] args) throws Exception {
-//		new StudentInfoImporter(new File("testExcels.xlsx")).importData();
-	}
-
 }

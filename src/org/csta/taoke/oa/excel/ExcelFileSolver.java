@@ -31,6 +31,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * 修订版本：
  * 2017-12-18 首次编写
  * 2018-01-01 修正错误
+ * 2018-01-04 更新Apache-POI版本到3.17
  * 
  * @author 路伟饶
  *

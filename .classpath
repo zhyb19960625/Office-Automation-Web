@@ -14,19 +14,19 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mysql/mysql-connector-java-5.1.45-bin.jar" sourcepath="WebRoot/WEB-INF/lib/mysql/src.zip"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/apache-poi/commons-codec-1.10.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/apache-poi/commons-collections4-4.1.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/apache-poi/commons-logging-1.2.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/apache-poi/curvesapi-1.04.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/apache-poi/junit-4.12.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/apache-poi/log4j-1.2.17.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/apache-poi/poi-3.16.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/apache-poi/poi-examples-3.16.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/apache-poi/poi-excelant-3.16.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/apache-poi/poi-ooxml-3.16.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/apache-poi/poi-ooxml-schemas-3.16.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/apache-poi/poi-scratchpad-3.16.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/apache-poi/log4j-1.2.17.jar" sourcepath="WebRoot/WEB-INF/lib/apache-poi/src.zip"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/apache-poi/poi-3.17.jar" sourcepath="WebRoot/WEB-INF/lib/apache-poi/src.zip"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/apache-poi/poi-examples-3.17.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/apache-poi/poi-excelant-3.17.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/apache-poi/poi-ooxml-3.17.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/apache-poi/poi-ooxml-schemas-3.17.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/apache-poi/poi-scratchpad-3.17.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/apache-poi/curvesapi-1.04.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/apache-poi/xmlbeans-2.6.0.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mysql/mysql-connector-java-8.0.8-dmr.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -1,10 +1,16 @@
 package org.csta.taoke.oa.entity;
+
+import java.sql.Date;
+
+import org.csta.taoke.oa.common.DateTimeTools;
+
 /**
  * 功能：
  * 学生信息数据模型
  * 
  * 修订版本：
  * 2018-01-01 首次编写
+ * 2018-01-04 修改生日的类型为Date，借助DateTimeTools进行转换
  * 
  * @author 路伟饶
  *
@@ -21,7 +27,7 @@ public class Student {
 //	班级
 	private String classes;
 //	出生日期
-	private String birthday;
+	private Date birthday;
 //	政治面貌
 	private String poc;
 //	民族
@@ -82,11 +88,11 @@ public class Student {
 	public void setClasses(String classes) {
 		this.classes = classes;
 	}
-	public String getBirthday() {
+	public Date getBirthday() {
 		return birthday;
 	}
 	public void setBirthday(String birthday) {
-		this.birthday = birthday;
+		this.birthday = DateTimeTools.conventDateStringToObject(birthday, "-");
 	}
 	public String getPoc() {
 		return poc;

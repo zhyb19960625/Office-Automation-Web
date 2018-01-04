@@ -1,6 +1,8 @@
 package org.csta.taoke.oa.entity;
 
 import java.sql.Date;
+
+import org.csta.taoke.oa.common.DateTimeTools;
 /**
  * 功能：
  * 文章数据模型
@@ -27,14 +29,14 @@ public class Article {
 	public long getId() {
 		return id;
 	}
-	public void setId(long id) {
-		this.id = id;
+	public void setId(String id) {
+		this.id = Long.valueOf(id);
 	}
 	public Date getCreatetime() {
 		return createtime;
 	}
-	public void setCreatetime(Date createtime) {
-		this.createtime = createtime;
+	public void setCreatetime(String createtime) {
+		this.createtime = DateTimeTools.conventDateStringToObject(createtime, "-");
 	}
 	public String getTitle() {
 		return title;
@@ -57,7 +59,7 @@ public class Article {
 	public long getAttachment() {
 		return attachment;
 	}
-	public void setAttachment(long attachment) {
-		this.attachment = attachment;
+	public void setAttachment(String attachment) {
+		this.attachment = Long.valueOf(attachment);
 	}
 }
