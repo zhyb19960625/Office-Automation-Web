@@ -1,0 +1,120 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>Office</groupId>
+  <artifactId>Office</artifactId>
+  <version>1.0</version>
+  <packaging>war</packaging>
+  <name>Office-Automation-Web</name>
+  <description>中国民航大学计算机科学与技术学院办公自动化系统Web版本</description>
+  <build>
+    <sourceDirectory>src</sourceDirectory>
+    <resources>
+      <resource>
+        <directory>src</directory>
+        <excludes>
+          <exclude>**/*.java</exclude>
+        </excludes>
+      </resource>
+    </resources>
+    
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.7.0</version>
+        <configuration>
+          <release>9</release>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.0.0</version>
+        <configuration>
+          <warSourceDirectory>WebRoot</warSourceDirectory>
+        </configuration>
+      </plugin>
+    </plugins>
+    
+  </build>
+  
+  <url>https://github.com/CSTA-CAUC/Office-Automation-Web</url>
+  <organization>
+  	<name>CSTA-CAUC</name>
+  	<url>https://github.com/CSTA-CAUC</url>
+  </organization>
+  
+  <dependencies>
+<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>5.1.45</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
+<dependency>
+    <groupId>commons-codec</groupId>
+    <artifactId>commons-codec</artifactId>
+    <version>1.11</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-collections4 -->
+<dependency>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-collections4</artifactId>
+    <version>4.1</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
+<dependency>
+    <groupId>commons-logging</groupId>
+    <artifactId>commons-logging</artifactId>
+    <version>1.2</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/junit/junit -->
+<dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <version>4.12</version>
+    <scope>test</scope>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
+<dependency>
+    <groupId>org.apache.logging.log4j</groupId>
+    <artifactId>log4j-core</artifactId>
+    <version>2.10.0</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+<dependency>
+    <groupId>org.apache.poi</groupId>
+    <artifactId>poi</artifactId>
+    <version>3.17</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
+<dependency>
+    <groupId>org.apache.poi</groupId>
+    <artifactId>poi-ooxml</artifactId>
+    <version>3.17</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-scratchpad -->
+<dependency>
+    <groupId>org.apache.poi</groupId>
+    <artifactId>poi-scratchpad</artifactId>
+    <version>3.17</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml-schemas -->
+<dependency>
+    <groupId>org.apache.poi</groupId>
+    <artifactId>poi-ooxml-schemas</artifactId>
+    <version>3.17</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-excelant -->
+<dependency>
+    <groupId>org.apache.poi</groupId>
+    <artifactId>poi-excelant</artifactId>
+    <version>3.17</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-examples -->
+<dependency>
+    <groupId>org.apache.poi</groupId>
+    <artifactId>poi-examples</artifactId>
+    <version>3.17</version>
+</dependency>
+  </dependencies>
+</project>

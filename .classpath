@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+	<classpathentry including="**/*.java" kind="src" output="target/classes" path="src">
 		<attributes>
-			<attribute name="module" value="true"/>
-			<attribute name="owner.project.facets" value="java"/>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-9">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v8.5.23">
@@ -12,21 +16,11 @@
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
-	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mysql/mysql-connector-java-5.1.45-bin.jar" sourcepath="WebRoot/WEB-INF/lib/mysql/src.zip"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/apache-poi/commons-codec-1.10.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/apache-poi/commons-collections4-4.1.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/apache-poi/commons-logging-1.2.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/apache-poi/junit-4.12.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/apache-poi/log4j-1.2.17.jar" sourcepath="WebRoot/WEB-INF/lib/apache-poi/src.zip"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/apache-poi/poi-3.17.jar" sourcepath="WebRoot/WEB-INF/lib/apache-poi/src.zip"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/apache-poi/poi-examples-3.17.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/apache-poi/poi-excelant-3.17.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/apache-poi/poi-ooxml-3.17.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/apache-poi/poi-ooxml-schemas-3.17.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/apache-poi/poi-scratchpad-3.17.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/apache-poi/curvesapi-1.04.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/apache-poi/xmlbeans-2.6.0.jar"/>
-	<classpathentry kind="output" path="build/classes"/>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="target/classes"/>
 </classpath>
