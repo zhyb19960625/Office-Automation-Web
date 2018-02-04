@@ -9,6 +9,7 @@ package org.csta.taoke.oa.service;
  * @author 路伟饶
  *
  */
+@Deprecated
 public class ArticleTableService {
 
 }

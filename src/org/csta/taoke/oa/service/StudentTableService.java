@@ -19,6 +19,7 @@ import org.csta.taoke.oa.entity.Student;
  * @author 路伟饶
  *
  */
+@Deprecated
 public class StudentTableService {
 	private Connection connection;
 //	配置文件，将表头写入了配置文件
