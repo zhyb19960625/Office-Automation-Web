@@ -9,6 +9,8 @@ package org.csta.taoke.oa.entity;
  * @author 路伟饶
  *
  */
+
+@Deprecated
 public class Attachment {
 //	附件ID，由数据库自动生成，一般不需要设置
 	private long id;
