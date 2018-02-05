@@ -1,4 +1,4 @@
-package org.csta.taoke.oa.entity;
+package org.csta.taoke.oa.article.entity;
 
 import java.sql.Date;
 
