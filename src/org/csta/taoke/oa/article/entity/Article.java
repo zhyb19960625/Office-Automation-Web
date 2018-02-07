@@ -9,6 +9,7 @@ import org.csta.taoke.oa.common.DateTimeTools;
  * 
  * 修订版本：
  * 2018-01-03 首次编写
+ * 2018-02-07 增加删除标志
  * 
  * @author 路伟饶
  *
@@ -26,6 +27,9 @@ public class Article {
 	private String location;
 //	文章附带的附件的ID，是一个外码
 	private long attachment;
+//	文章是否被删除
+	private int isdel;
+	
 	public long getId() {
 		return id;
 	}
@@ -61,5 +65,11 @@ public class Article {
 	}
 	public void setAttachment(String attachment) {
 		this.attachment = Long.valueOf(attachment);
+	}
+	public int getIsdel() {
+		return isdel;
+	}
+	public void setIsdel(int isdel) {
+		this.isdel = isdel;
 	}
 }
