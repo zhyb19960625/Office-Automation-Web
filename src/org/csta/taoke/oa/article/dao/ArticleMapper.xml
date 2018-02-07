@@ -5,36 +5,52 @@
     <select id="getArticleList" 
 	resultType="org.csta.taoke.oa.article.entity.Article" 
 	parameterType="org.csta.taoke.oa.article.entity.Article">
-		<!-- 此处写SQL语句 -->
+		select * from office.article where isdel = 0;
 	</select>
 	<select id="getArticleTrashList" 
 	resultType="org.csta.taoke.oa.article.entity.Article" 
 	parameterType="org.csta.taoke.oa.article.entity.Article">
-		<!-- 此处写SQL语句 -->
+		select * from office.article where isdel = 1;
 	</select>
-	<select id="getArticle" 
+	<select id="getArticle"
 	resultType="org.csta.taoke.oa.article.entity.Article" 
 	parameterType="org.csta.taoke.oa.article.entity.Article">
-		<!-- 此处写SQL语句 -->
+		select * from office.article where isdel = 1 and id = #{id};
 	</select>
 	<insert id="insertArticle" 
 	parameterType="org.csta.taoke.oa.article.entity.Article">
-		<!-- 此处写SQL语句 -->
+		insert into office.article(title,author,location,attachment,isdel)
+		values (
+		#{title},
+		#{author},
+		#{location},
+		#{attachment},
+		0);
 	</insert>
 	<update id="updateArticle" 
 	parameterType="org.csta.taoke.oa.article.entity.Article">
-		<!-- 此处写SQL语句 -->
+		update office.article set 
+		title = #{title},
+		author = #{author},
+		location = #{location},
+		attachment = #{attachment}
+		where id = #{id};
 	</update>
-	<update id="removeArticle" 
+	<update id="removeArticle"
 	parameterType="org.csta.taoke.oa.article.entity.Article">
-		<!-- 此处写SQL语句 -->
+		update office.article set
+		isdel = 1 
+		where id = #{id};
 	</update>
 	<update id="redoArticle" 
 	parameterType="org.csta.taoke.oa.article.entity.Article">
-		<!-- 此处写SQL语句 -->
+		update office.article set
+		isdel = 0 
+		where id = #{id};
 	</update>
 	<delete id="deleteArticle" 
 	parameterType="org.csta.taoke.oa.article.entity.Article">
-		<!-- 此处写SQL语句 -->
+		delete from office.article
+		where id = #{id};
 	</delete>
 </mapper>
