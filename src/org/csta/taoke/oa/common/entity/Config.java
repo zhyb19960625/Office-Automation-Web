@@ -9,7 +9,10 @@ public class Config {
 	private static final Properties PROP=new Properties();
 	public static String ROOT;
 	private Config() {
-//		init
+		String path = Thread.currentThread().getContextClassLoader().getResource("").toString();
+		path = path.replace("file:", "");
+		path = path.replace("classes/", "");
+		System.out.println(path);
 	}
 	public void initConfig() throws IOException {
 		InputStream inputStream=Config.class.getResourceAsStream(path);

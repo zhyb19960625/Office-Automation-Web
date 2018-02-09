@@ -4,16 +4,18 @@ package org.csta.taoke.oa.attachment.entity;
  * 附件数据模型
  * 
  * 修订版本：
- * 2018-01-03 首次编写
+ * 2018-02-09 增加附件名称
  * 2018-02-07 增加删除标志
+ * 2018-01-03 首次编写
  * 
  * @author 路伟饶
  *
  */
-
 public class Attachment {
 //	附件ID，由数据库自动生成，一般不需要设置
 	private long id;
+//	附件名称，附件的文件名
+	private String name;
 //	附件在服务器上存储的位置
 	private String location;
 //	附件的文件类型
@@ -28,6 +30,12 @@ public class Attachment {
 	}
 	public void setId(String id) {
 		this.id = Long.valueOf(id);
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getLocation() {
 		return location;

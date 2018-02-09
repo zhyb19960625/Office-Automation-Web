@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+ 
+<!-- 定义了附件相关数据库操作所需的SQL语句的XML文件 -->
+<!-- 具体数据库操作由Spring DAO框架自动实现 -->
+ 
 <mapper namespace="org.csta.taoke.oa.attachment.dao.AttachmentMapper">
     <select id="getAttachmentList" 
 	resultType="org.csta.taoke.oa.attachment.entity.Attachment" 

@@ -52,9 +52,9 @@ public class ArticleController {
 		Map<String, Object> data=new HashMap<String, Object>();
 		try {
 //			执行数据库操作
-			List<Article> collectorList=service.getArticleList(article);
-			data.put("number", collectorList.size());
-			data.put("article", collectorList);
+			List<Article> articleList=service.getArticleList(article);
+			data.put("number", articleList.size());
+			data.put("article", articleList);
 			data.put("status",StatusConst.SUCCESS);
 		}
 		catch(Exception e) {
@@ -80,9 +80,9 @@ public class ArticleController {
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		Map<String, Object> data=new HashMap<String, Object>();
 		try {
-			List<Article> collectorList=service.getArticleTrashList(article);
-			data.put("number", collectorList.size());
-			data.put("article", collectorList);
+			List<Article> articleList=service.getArticleTrashList(article);
+			data.put("number", articleList.size());
+			data.put("article", articleList);
 			data.put("status",StatusConst.SUCCESS);
 		}
 		catch(Exception e) {
@@ -108,9 +108,9 @@ public class ArticleController {
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		Map<String, Object> data=new HashMap<String, Object>();
 		try {
-			List<Article> collectorList=service.getArticle(article);
-			data.put("number", collectorList.size());
-			data.put("article", collectorList);
+			List<Article> articleList=service.getArticle(article);
+			data.put("number", articleList.size());
+			data.put("article", articleList);
 			data.put("status",StatusConst.SUCCESS);
 		}
 		catch(Exception e) {
