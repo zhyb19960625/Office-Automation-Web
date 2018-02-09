@@ -5,36 +5,52 @@
     <select id="getAttachmentList" 
 	resultType="org.csta.taoke.oa.attachment.entity.Attachment" 
 	parameterType="org.csta.taoke.oa.attachment.entity.Attachment">
-		<!-- 此处写SQL语句 -->
+		select * from office.attachment where isdel = 0;
 	</select>
 	<select id="getAttachmentTrashList" 
 	resultType="org.csta.taoke.oa.attachment.entity.Attachment" 
 	parameterType="org.csta.taoke.oa.attachment.entity.Attachment">
-		<!-- 此处写SQL语句 -->
+		select * from office.attachment where isdel = 1;
 	</select>
 	<select id="getAttachment" 
 	resultType="org.csta.taoke.oa.attachment.entity.Attachment" 
 	parameterType="org.csta.taoke.oa.attachment.entity.Attachment">
-		<!-- 此处写SQL语句 -->
+		select * from office.attachment where isdel = 0 and 
+		id = (select attachment from office.article where isdel = 0 and id = #{id});
 	</select>
 	<insert id="insertAttachment" 
 	parameterType="org.csta.taoke.oa.attachment.entity.Attachment">
-		<!-- 此处写SQL语句 -->
+		insert into office.attachment(location,type,keyentry,isdel) 
+		values (
+		#{location},
+		#{type},
+		#{keyentry},
+		0);
 	</insert>
 	<update id="updateAttachment" 
 	parameterType="org.csta.taoke.oa.attachment.entity.Attachment">
-		<!-- 此处写SQL语句 -->
+		update office.attachment set 
+		location = #{location},
+		type = #{type},
+		keyentry = #{keyentry} 
+		where isdel = 0 and 
+		id = (select attachment from office.article where isdel = 0 and id = #{id});
 	</update>
 	<update id="removeAttachment" 
 	parameterType="org.csta.taoke.oa.attachment.entity.Attachment">
-		<!-- 此处写SQL语句 -->
+		update office.attachment set 
+		isdel = 1
+		where id = (select attachment from office.article where isdel = 0 and id = #{id});
 	</update>
 	<update id="redoAttachment" 
 	parameterType="org.csta.taoke.oa.attachment.entity.Attachment">
-		<!-- 此处写SQL语句 -->
+		update office.attachment set 
+		isdel = 0
+		where id = (select attachment from office.article where isdel = 0 and id = #{id});
 	</update>
 	<delete id="deleteAttachment" 
 	parameterType="org.csta.taoke.oa.attachment.entity.Attachment">
-		<!-- 此处写SQL语句 -->
+		delete from office.attachment 
+		where id = (select attachment from office.article where isdel = 0 and id = #{id});
 	</delete>
 </mapper>

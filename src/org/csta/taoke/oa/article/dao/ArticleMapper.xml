@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+ 
+<!-- 定义了文章相关数据库操作所需的SQL语句的XML文件 -->
+<!-- 具体数据库操作由Spring DAO框架自动实现 -->
+
 <mapper namespace="org.csta.taoke.oa.article.dao.ArticleMapper">
     <select id="getArticleList" 
 	resultType="org.csta.taoke.oa.article.entity.Article" 
@@ -34,7 +38,7 @@
 		author = #{author},
 		location = #{location},
 		attachment = #{attachment}
-		where id = #{id};
+		where isdel = 0 and id = #{id};
 	</update>
 	<update id="removeArticle"
 	parameterType="org.csta.taoke.oa.article.entity.Article">

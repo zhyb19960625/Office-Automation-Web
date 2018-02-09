@@ -8,8 +8,8 @@ import org.csta.taoke.oa.common.DateTimeTools;
  * 文章数据模型
  * 
  * 修订版本：
- * 2018-01-03 首次编写
  * 2018-02-07 增加删除标志
+ * 2018-01-03 首次编写
  * 
  * @author 路伟饶
  *

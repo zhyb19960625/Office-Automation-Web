@@ -16,19 +16,42 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+/**
+ * 功能：
+ * 文章控制器类，Spring MVC中的控制器类，返回关于文章的HTTP响应
+ * 注解 @Controller 代表这是一个控制器类
+ * 注解 @RequestMapping 定义了匹配的域名路径
+ * 
+ * 修订版本：
+ * 2018-02-07 首次编写
+ * 
+ * @author 路伟饶
+ *
+ */
 @Controller
 @RequestMapping("/article")
 public class ArticleController {
+//	文章的数据库服务类的实现对象，包含了数据库操作的具体实现（数据库映射类）
 	@Autowired
 	private ArticleServiceImpl service;
-	
+	/**
+	 * 获取全部文章列表的响应体方法 @ResponseBody
+	 * 域名路径匹配到 @RequestMapping 定义的路径
+	 * @param article 文章对象
+	 * @param request HTTP请求对象
+	 * @param response HTTP响应对象
+	 * @return 返回的实际是JSON类型，在Java中是Map类型
+	 * @throws UnsupportedEncodingException 抛出不支持的编码异常
+	 */
 	@ResponseBody
 	@RequestMapping("/getArticleList")
 	public Object getArticleList(Article article,HttpServletRequest request,HttpServletResponse response) 
 			throws UnsupportedEncodingException {
+//		允许跨域访问
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		Map<String, Object> data=new HashMap<String, Object>();
 		try {
+//			执行数据库操作
 			List<Article> collectorList=service.getArticleList(article);
 			data.put("number", collectorList.size());
 			data.put("article", collectorList);
@@ -41,7 +64,15 @@ public class ArticleController {
 		}
 		return data;
 	}
-	
+	/**
+	 * 获取已删除的文章列表的响应体方法 @ResponseBody
+	 * 域名路径匹配到 @RequestMapping 定义的路径
+	 * @param article 文章对象
+	 * @param request HTTP请求对象
+	 * @param response HTTP响应对象
+	 * @return 返回的实际是JSON类型，在Java中是Map类型
+	 * @throws UnsupportedEncodingException 抛出不支持的编码异常
+	 */
 	@ResponseBody
 	@RequestMapping("/getArticleTrashList")
 	public Object getArticleTrashList(Article article,HttpServletRequest request,HttpServletResponse response) 
@@ -61,7 +92,15 @@ public class ArticleController {
 		}
 		return data;
 	}
-	
+	/**
+	 * 按照ID获取文章的响应体方法 @ResponseBody
+	 * 域名路径匹配到 @RequestMapping 定义的路径
+	 * @param article 文章对象
+	 * @param request HTTP请求对象
+	 * @param response HTTP响应对象
+	 * @return 返回的实际是JSON类型，在Java中是Map类型
+	 * @throws UnsupportedEncodingException 抛出不支持的编码异常
+	 */
 	@ResponseBody
 	@RequestMapping("/getArticle")
 	public Object getArticle(Article article,HttpServletRequest request,HttpServletResponse response) 
@@ -81,7 +120,15 @@ public class ArticleController {
 		}
 		return data;
 	}
-	
+	/**
+	 * 插入文章的响应体方法 @ResponseBody
+	 * 域名路径匹配到 @RequestMapping 定义的路径
+	 * @param article 文章对象
+	 * @param request HTTP请求对象
+	 * @param response HTTP响应对象
+	 * @return 返回的实际是JSON类型，在Java中是Map类型
+	 * @throws UnsupportedEncodingException 抛出不支持的编码异常
+	 */
 	@ResponseBody
 	@RequestMapping("/insertArticle")
 	public Object insertArticle(Article article,HttpServletRequest request,HttpServletResponse response) 
@@ -98,7 +145,15 @@ public class ArticleController {
 		}
 		return data;
 	}
-	
+	/**
+	 * 更新文章的响应体方法 @ResponseBody
+	 * 域名路径匹配到 @RequestMapping 定义的路径
+	 * @param article 文章对象
+	 * @param request HTTP请求对象
+	 * @param response HTTP响应对象
+	 * @return 返回的实际是JSON类型，在Java中是Map类型
+	 * @throws UnsupportedEncodingException 抛出不支持的编码异常
+	 */
 	@ResponseBody
 	@RequestMapping("/updateArticle")
 	public Object updateArticle(Article article,HttpServletRequest request,HttpServletResponse response) 
@@ -115,7 +170,15 @@ public class ArticleController {
 		}
 		return data;
 	}
-	
+	/**
+	 * 移动文章到回收站的响应体方法 @ResponseBody
+	 * 域名路径匹配到 @RequestMapping 定义的路径
+	 * @param article 文章对象
+	 * @param request HTTP请求对象
+	 * @param response HTTP响应对象
+	 * @return 返回的实际是JSON类型，在Java中是Map类型
+	 * @throws UnsupportedEncodingException 抛出不支持的编码异常
+	 */
 	@ResponseBody
 	@RequestMapping("/removeArticle")
 	public Object removeArticle(Article article,HttpServletRequest request,HttpServletResponse response) 
@@ -132,7 +195,15 @@ public class ArticleController {
 		}
 		return data;
 	}
-	
+	/**
+	 * 从回收站还原文章的响应体方法 @ResponseBody
+	 * 域名路径匹配到 @RequestMapping 定义的路径
+	 * @param article 文章对象
+	 * @param request HTTP请求对象
+	 * @param response HTTP响应对象
+	 * @return 返回的实际是JSON类型，在Java中是Map类型
+	 * @throws UnsupportedEncodingException 抛出不支持的编码异常
+	 */
 	@ResponseBody
 	@RequestMapping("/redoArticle")
 	public Object redoArticle(Article article,HttpServletRequest request,HttpServletResponse response) 
@@ -149,7 +220,15 @@ public class ArticleController {
 		}
 		return data;
 	}
-	
+	/**
+	 * 彻底删除文章的响应体方法 @ResponseBody
+	 * 域名路径匹配到 @RequestMapping 定义的路径
+	 * @param article 文章对象
+	 * @param request HTTP请求对象
+	 * @param response HTTP响应对象
+	 * @return 返回的实际是JSON类型，在Java中是Map类型
+	 * @throws UnsupportedEncodingException 抛出不支持的编码异常
+	 */
 	@ResponseBody
 	@RequestMapping("/deleteArticle")
 	public Object deleteArticle(Article article,HttpServletRequest request,HttpServletResponse response) 

@@ -7,9 +7,20 @@ import org.csta.taoke.oa.article.entity.Article;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * 功能：
+ * 关于文章的映射到数据库操作的接口的实现类
+ * 
+ * 修订版本：
+ * 2018-02-07 首次编写
+ * 
+ * @author 路伟饶
+ *
+ */
 @Service
 public class ArticleServiceImpl implements ArticleService {
 	
+//	包含一个数据库映射类的对象
 	@Autowired
 	private ArticleMapper dao;
 	
