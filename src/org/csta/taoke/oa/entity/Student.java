@@ -15,6 +15,8 @@ import org.csta.taoke.oa.common.DateTimeTools;
  * @author 路伟饶
  *
  */
+
+@Deprecated
 public class Student {
 //	学号
 	private long id;

@@ -1,14 +1,16 @@
-package org.csta.taoke.oa.entity;
+package org.csta.taoke.oa.attachment.entity;
 /**
  * 功能：
  * 附件数据模型
  * 
  * 修订版本：
  * 2018-01-03 首次编写
+ * 2018-02-07 增加删除标志
  * 
  * @author 路伟饶
  *
  */
+
 public class Attachment {
 //	附件ID，由数据库自动生成，一般不需要设置
 	private long id;
@@ -18,6 +20,9 @@ public class Attachment {
 	private String type;
 //	加密附件的密钥库入口名称，用于找到解密所需的密钥
 	private String keyentry;
+//	附件是否被删除
+	private int isdel;
+	
 	public long getId() {
 		return id;
 	}
@@ -41,5 +46,11 @@ public class Attachment {
 	}
 	public void setKeyentry(String keyentry) {
 		this.keyentry = keyentry;
+	}
+	public int getIsdel() {
+		return isdel;
+	}
+	public void setIsdel(int isdel) {
+		this.isdel = isdel;
 	}
 }
