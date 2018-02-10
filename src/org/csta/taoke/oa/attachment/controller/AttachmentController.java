@@ -1,17 +1,21 @@
 package org.csta.taoke.oa.attachment.controller;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServlet;
+import javax.crypto.SecretKey;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.csta.taoke.oa.attachment.entity.Attachment;
 import org.csta.taoke.oa.attachment.entity.DecryptAttachment;
 import org.csta.taoke.oa.attachment.service.AttachmentServiceImpl;
+import org.csta.taoke.oa.security.CryptoCore;
+import org.csta.taoke.oa.security.KeyStoreManager;
 import org.csta.taoke.oa.util.StatusConst;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,8 +49,9 @@ public class AttachmentController {
 		Map<String, Object> data=new HashMap<String, Object>();
 		try {
 			List<Attachment> attachmentList=service.getAttachmentList(attachment);
+			List<DecryptAttachment> decryptAttachments = decryptAttachmentList(attachmentList);
 			data.put("number", attachmentList.size());
-			data.put("attachment", attachmentList);
+			data.put("attachment", decryptAttachments);
 			data.put("status",StatusConst.SUCCESS);
 		}
 		catch(Exception e) {
@@ -65,8 +70,9 @@ public class AttachmentController {
 		Map<String, Object> data=new HashMap<String, Object>();
 		try {
 			List<Attachment> attachmentList=service.getAttachmentTrashList(attachment);
+			List<DecryptAttachment> decryptAttachments = decryptAttachmentList(attachmentList);
 			data.put("number", attachmentList.size());
-			data.put("attachment", attachmentList);
+			data.put("attachment", decryptAttachments);
 			data.put("status",StatusConst.SUCCESS);
 		}
 		catch(Exception e) {
@@ -85,8 +91,9 @@ public class AttachmentController {
 		Map<String, Object> data=new HashMap<String, Object>();
 		try {
 			List<Attachment> attachmentList=service.getAttachment(attachment);
+			List<DecryptAttachment> decryptAttachments = decryptAttachmentList(attachmentList);
 			data.put("number", attachmentList.size());
-			data.put("attachment", attachmentList);
+			data.put("attachment", decryptAttachments);
 			data.put("status",StatusConst.SUCCESS);
 		}
 		catch(Exception e) {
@@ -182,7 +189,33 @@ public class AttachmentController {
 		return data;
 	}
 	
-	private List<DecryptAttachment> decryptAttachmentList(List<Attachment> attachments) {
-		return null;
+	private List<DecryptAttachment> decryptAttachmentList(List<Attachment> attachments) throws Exception {
+		String path = Thread.currentThread().getContextClassLoader().getResource("").toString();
+		path = path.replace("file:", "");
+		path = path.replace("classes/", "security/");
+		File keystorePath = new File(path);
+//		如果存储路径不存在
+		if (!keystorePath.exists() && !keystorePath.isDirectory()) {
+			keystorePath.mkdir();
+		}
+		File keystoreFile = new File(path+"KeyStoreCenter.keystore");
+		KeyStoreManager manager = KeyStoreManager.getInstance();
+		manager.openKeyStoreFromFile(keystoreFile, "12345678".toCharArray());
+		List<DecryptAttachment> decryptAttachments = new ArrayList<>();
+		for(Attachment attachment : attachments) {
+			String keyEntryString = attachment.getKeyentry();
+			SecretKey key = manager.getSymmetricKey(keyEntryString);
+			File decryptFile = new File(attachment.getLocation());
+//			文件存储路径未确定
+			File outputFile = new File("xxx"+attachment.getName());
+			CryptoCore cryptoCore = CryptoCore.getInstance();
+			cryptoCore.decryptFile(decryptFile, key, outputFile);
+			DecryptAttachment decryptAttachment = new DecryptAttachment();
+			decryptAttachment.setId(attachment.getId());
+			decryptAttachment.setName(attachment.getName());
+			decryptAttachment.setTemplocation(outputFile.getAbsolutePath());
+			decryptAttachments.add(decryptAttachment);
+		}
+		return decryptAttachments;
 	}
 }
