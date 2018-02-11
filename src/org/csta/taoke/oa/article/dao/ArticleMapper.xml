@@ -28,12 +28,16 @@
 	<update id="updateArticle" 
 	parameterType="org.csta.taoke.oa.article.entity.Article">
 <<<<<<< HEAD
+<<<<<<< HEAD
 		update office.article set 
 		title = #{title},
 		author = #{author},
 		location = #{location},
 		attachment = #{attachment}
 		where isdel = 0 and id = #{id};
+=======
+		<!-- 此处写SQL语句 -->
+>>>>>>> parent of e6ad28f... Article SQL Update
 =======
 		<!-- 此处写SQL语句 -->
 >>>>>>> parent of e6ad28f... Article SQL Update
