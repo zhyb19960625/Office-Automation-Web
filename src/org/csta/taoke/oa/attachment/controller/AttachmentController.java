@@ -200,6 +200,7 @@ public class AttachmentController {
 		}
 		File keystoreFile = new File(path+"KeyStoreCenter.keystore");
 		KeyStoreManager manager = KeyStoreManager.getInstance();
+//		密码需要修改！！！
 		manager.openKeyStoreFromFile(keystoreFile, "12345678".toCharArray());
 		List<DecryptAttachment> decryptAttachments = new ArrayList<>();
 		for(Attachment attachment : attachments) {
