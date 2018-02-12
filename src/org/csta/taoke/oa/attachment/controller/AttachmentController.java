@@ -21,14 +21,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 /**
  * 功能：
- * 附件控制器类，Spring MVC中的控制器类，返回关于文章的HTTP响应
+ * 附件控制器类，Spring MVC中的控制器类，返回关于附件的HTTP响应
  * 注解 @Controller 代表这是一个控制器类
  * 注解 @RequestMapping 定义了匹配的域名路径
  * 
  * 修订版本：
+ * 2018-02-11 新增解密附件功能
  * 2018-02-07 首次编写
  * 
  * @author 路伟饶
@@ -110,7 +113,19 @@ public class AttachmentController {
 			throws UnsupportedEncodingException {
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		Map<String, Object> data=new HashMap<String, Object>();
+		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+        MultipartFile multipartFile = multipartRequest.getFile("file");   
+		String path = Thread.currentThread().getContextClassLoader().getResource("").toString();
+		path = path.replace("file:", "");
+		path = path.replace("classes/", "uploads/");
+		File keystorePath = new File(path);
+//		如果存储路径不存在
+		if (!keystorePath.exists() && !keystorePath.isDirectory()) {
+			keystorePath.mkdir();
+		}
+		File source = new File(path + multipartFile.getOriginalFilename());
 		try {
+			multipartFile.transferTo(source);
 //			service.insertAttachment(attachment);
 			data.put("status",StatusConst.SUCCESS);
 		}
