@@ -12,6 +12,8 @@ import javax.crypto.SecretKey;
  * 密钥库管理类，默认使用JCEKS密钥库
  * 
  * 修订版本：
+ * 2018-02-13 新增存储密钥功能
+ * 2018-02-11 删除部分功能
  * 2017-06-23 首次编写
  * 
  * @author 路伟饶
@@ -83,6 +85,22 @@ public class KeyStoreManager {
 		SecretKey key=keyEntry.getSecretKey();
 		in.close();
 		return key;
+	}
+	/**
+	 * 存储一个对称密码的密钥到密钥库
+	 * @param key
+	 * 密钥对象
+	 * @param entryName
+	 * 入口名称
+	 * @throws Exception
+	 */
+	public void saveSymmetricKey(SecretKey key, String entryName) throws Exception {
+		FileInputStream in=new FileInputStream(keystoreFile);
+		keystoreInst.load(in, password);
+		KeyStore.ProtectionParameter protParam=new KeyStore.PasswordProtection(password);
+		KeyStore.SecretKeyEntry keyEntry = new KeyStore.SecretKeyEntry(key);
+		keystoreInst.setEntry(entryName, keyEntry, protParam);
+		keystoreInst.store(new FileOutputStream(keystoreFile), password);
 	}
 	
 }

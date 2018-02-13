@@ -16,6 +16,7 @@ import javax.crypto.spec.IvParameterSpec;
  * 文件加解密类
  * 
  * 修订版本：
+ * 2018-02-13 将从密码获得密钥的方法更改为静态公有方法
  * 2018-02-10 增加使用给定密钥加解密的方法
  * 2017-06-23 首次编写
  * 
@@ -142,7 +143,7 @@ public class CryptoCore {
 		outputStream=new FileOutputStream(outputFile);
 	}
 	/**
-	 * 通过密码获得密钥，私有方法
+	 * 通过密码获得密钥
 	 * @param password
 	 * 用于获取密钥的密码
 	 * @param keyLengthByByte
@@ -151,7 +152,7 @@ public class CryptoCore {
 	 * 构建好的密钥对象
 	 * @throws Exception
 	 */
-	private SecretKey getKeyByPassword(char[] password,int keyLengthByByte) throws Exception {
+	public static SecretKey getKeyByPassword(char[] password,int keyLengthByByte) throws Exception {
 		KeyGenerator generator=KeyGenerator.getInstance("AES");
 		byte[] passwordValue=new String(password).getBytes();
 		SecureRandom random=SecureRandom.getInstance("SHA1PRNG");

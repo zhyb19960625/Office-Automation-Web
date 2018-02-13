@@ -24,8 +24,9 @@
 	</select>
 	<insert id="insertAttachment" 
 	parameterType="org.csta.taoke.oa.attachment.entity.Attachment">
-		insert into office.attachment(location,type,keyentry,isdel) 
+		insert into office.attachment(name,location,type,keyentry,isdel) 
 		values (
+		#{name},
 		#{location},
 		#{type},
 		#{keyentry},
@@ -34,6 +35,7 @@
 	<update id="updateAttachment" 
 	parameterType="org.csta.taoke.oa.attachment.entity.Attachment">
 		update office.attachment set 
+		name = #{name},
 		location = #{location},
 		type = #{type},
 		keyentry = #{keyentry} 
