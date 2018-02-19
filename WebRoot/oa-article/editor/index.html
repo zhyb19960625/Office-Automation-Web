@@ -8,114 +8,27 @@
     <link rel="icon" href="">
     
     <!-- Bootstrap core CSS -->
-    <link href="../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/Office/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     
     <!-- Custom styles for this template -->
-    <link href="../lib/custom/starter-template.css" rel="stylesheet">
-    <link href="../lib/custom/sticky-footer.css" rel="stylesheet">
-    <link href="../lib/custom/dashboard.css" rel="stylesheet">
+    <link href="/Office/lib/custom/starter-template.css" rel="stylesheet">
+    <link href="/Office/lib/custom/sticky-footer.css" rel="stylesheet">
+    <link href="/Office/lib/custom/dashboard.css" rel="stylesheet">
     
 </head>
 <body>
 
-<header>
-<!--    顶部导航栏  -->
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#">计算机学院办公系统</a>
-        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbars" aria-controls="navbars" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbars">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">主页<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">设置</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">关于</a>
-                </li>
-            </ul>
-            <span class="navbar-text">欢迎您！系统管理员&nbsp;&nbsp;&nbsp;&nbsp;</span>
-            <button class="btn btn-danger btn-secondary" type="button">注销</button>
-        </div>
-    </nav>
-</header>
-<!-- 侧面导航栏 -->
-<div class="container-fluid">
-    <div class="row">
-        <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
-            <ul class="nav nav-pills flex-column">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">概览</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">通知查看</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">学院动态</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">学生信息</a>
-                </li>
-            </ul>
+<div id="bar" class="wrapper"></div>
 
-            <ul class="nav nav-pills flex-column">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">信息查看</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">内容列表</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">内容发布<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">内容草稿箱</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">内容回收站</a>
-                </li>
-            </ul>
-
-            <ul class="nav nav-pills flex-column">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">内容管理</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">用户管理</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">用户组</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">全局设定</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">调试信息</a>
-                </li>
-            </ul>
-        </nav>
 <!-- 主页面代码 -->
         <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
             <h1>发布文章</h1>
-            
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                <strong>兼容性提示：</strong>文本编辑器暂时不兼容Safari浏览器，请更换其他浏览器，敬请谅解。
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            
             
 <!--             文本编辑器 -->
             <div class="container">
                 <script id="editor" type="text/plain"></script>
             </div>
-            <br/>
 <!--             附件上传 -->
-
             <form action="/Office/attachment/insertAttachment" enctype="multipart/form-data" method="post">
                 请选择附件：
                 <input type="file" class="form-control form-control-sm" name="file">
@@ -125,6 +38,7 @@
             
             <div class="container">
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ask-model">保存并发布</button>
+                <button type="button" class="btn btn-primary" onclick="">预览</button>
                 <button type="button" class="btn btn-danger">放弃</button>
             </div>
         </main>
@@ -196,14 +110,14 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     
-    <script src="../lib/angular.min.js"></script>
-    <script src="../lib/popper.min.js"></script>
-    <script src="../lib/jquery-3.2.1.min.js"></script>
-    <script src="../lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/Office/lib/angular.min.js"></script>
+    <script src="/Office/lib/popper.min.js"></script>
+    <script src="/Office/lib/jquery-3.2.1.min.js"></script>
+    <script src="/Office/lib/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="ueditor.config.js"></script>
     <script type="text/javascript" charset="utf-8" src="ueditor.all.min.js"> </script>
     <script type="text/javascript" charset="utf-8" src="lang/zh-cn/zh-cn.js"></script>
-    <script type="text/javascript" src="./index.js"></script>
+    <script src="index.js"></script>
 
 </body>
 </html>

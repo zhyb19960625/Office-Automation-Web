@@ -8,95 +8,18 @@
 	<link rel="icon" href="">
 	
 	<!-- Bootstrap core CSS -->
-	<link href="./lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/Office/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	
 	<!-- Custom styles for this template -->
-	<link href="./lib/custom/starter-template.css" rel="stylesheet">
-	<link href="./lib/custom/sticky-footer.css" rel="stylesheet">
-	<link href="./lib/custom/dashboard.css" rel="stylesheet">
+	<link href="/Office/lib/custom/starter-template.css" rel="stylesheet">
+	<link href="/Office/lib/custom/sticky-footer.css" rel="stylesheet">
+	<link href="/Office/lib/custom/dashboard.css" rel="stylesheet">
 	
 </head>
 <body>
 
-<header>
-<!--    顶部导航栏  -->
-	<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-		<a class="navbar-brand" href="#">计算机学院办公系统</a>
-		<button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbars" aria-controls="navbars" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbars">
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
-					<a class="nav-link" href="#">主页<span class="sr-only">(current)</span></a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">设置</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">关于</a>
-				</li>
-			</ul>
-			<span class="navbar-text">欢迎您！系统管理员&nbsp;&nbsp;&nbsp;&nbsp;</span>
-			<button class="btn btn-danger btn-secondary" type="button">注销</button>
-		</div>
-	</nav>
-</header>
-<!-- 侧面导航栏 -->
-<div class="container-fluid">
-	<div class="row">
-		<nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
-			<ul class="nav nav-pills flex-column">
-				<li class="nav-item">
-					<a class="nav-link active" href="#">概览</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">通知查看</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">学院动态</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">公示信息</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">学生信息</a>
-				</li>
-			</ul>
+<div id="bar" class="wrapper"></div>
 
-			<ul class="nav nav-pills flex-column">
-				<li class="nav-item">
-					<a class="nav-link" href="#">内容列表</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">内容发布</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">内容草稿箱</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">内容回收站</a>
-				</li>
-			</ul>
-
-			<ul class="nav nav-pills flex-column">
-				<li class="nav-item">
-					<a class="nav-link" href="#">内容管理</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">用户管理</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">用户组</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">全局设定</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">调试信息</a>
-				</li>
-			</ul>
-		</nav>
 <!-- 主页面代码 -->
 		<main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
 		
@@ -112,7 +35,7 @@
 				<div class="card-body">
 					<h5 class="card-title">学生信息管理</h5>
 					<p class="card-text">通过计算机学院学生信息管理系统，学生可以维护自己的信息；班长可以查看班级同学信息；助理、辅导员和学院领导可以查看本年级全部学生信息。</p>
-					<a href="#" class="btn btn-primary">前往学生信息</a>
+					<a href="/Office/oa-main/student/" class="btn btn-primary">学生信息</a>
 				</div>
 			</div>
 			
@@ -124,8 +47,9 @@
 						<div class="card-body">
 							<h5 class="card-title">通知与动态</h5>
 							<p class="card-text">学生和老师可以通过此功能查看学院各类通知，动态信息，就业和公示等。</p>
-							<a href="#" class="btn btn-primary">前往查看通知</a>
-							<a href="#" class="btn btn-primary">前往学院动态</a>
+							<a href="/Office/oa-main/notice/" class="btn btn-primary">查看通知</a>
+							<a href="/Office/oa-main/college/" class="btn btn-primary">学院动态</a>
+							<a href="/Office/oa-main/announcement/" class="btn btn-primary">公示信息</a>
 						</div>
 					</div>
 				</div>
@@ -134,7 +58,7 @@
 						<div class="card-body">
 							<h5 class="card-title">内容发布</h5>
 							<p class="card-text">学院领导和辅导员可以通过办公系统向全学院的同学发布内容。</p>
-							<a href="#" class="btn btn-primary">前往内容发布</a>
+							<a href="/Office/oa-article/show/" class="btn btn-primary">前往内容发布</a>
 						</div>
 					</div>
 				</div>
@@ -146,10 +70,11 @@
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	
-	<script src="./lib/angular.min.js"></script>
-	<script src="./lib/popper.min.js"></script>
-	<script src="./lib/jquery-3.2.1.min.js"></script>
-	<script src="./lib/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/Office/lib/angular.min.js"></script>
+	<script src="/Office/lib/popper.min.js"></script>
+	<script src="/Office/lib/jquery-3.2.1.min.js"></script>
+	<script src="/Office/lib/bootstrap/js/bootstrap.min.js"></script>
+	<script src="index.js"></script>
 
 </body>
 </html>
