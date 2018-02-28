@@ -39,6 +39,9 @@ public class Article {
 	public Date getCreatetime() {
 		return createtime;
 	}
+	public void setCreatetime(Date createtime) {
+		this.createtime = createtime;
+	}
 	public void setCreatetime(String createtime) {
 		this.createtime = DateTimeTools.conventDateStringToObject(createtime, "-");
 	}

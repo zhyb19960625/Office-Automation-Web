@@ -1,9 +1,13 @@
 package org.csta.taoke.oa.article.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -131,11 +135,28 @@ public class ArticleController {
 	 */
 	@ResponseBody
 	@RequestMapping("/insertArticle")
-	public Object insertArticle(Article article,HttpServletRequest request,HttpServletResponse response) 
+	public Object insertArticle(HttpServletRequest request,HttpServletResponse response) 
 			throws UnsupportedEncodingException {
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		Map<String, Object> data=new HashMap<String, Object>();
 		try {
+//			获得HTML文件存储路径
+			String path = Thread.currentThread().getContextClassLoader().getResource("").toString();
+			path = path.replace("file:", "");
+//			产生唯一的文件夹名称并创建文件夹
+			path = path.replace("classes/", "articles/"+UUID.randomUUID().toString().toUpperCase()+"/");
+			new File(path).mkdirs();
+			File targetFile = new File(path + request.getParameter("title") + ".html");
+			FileOutputStream fos = new FileOutputStream(targetFile);
+			String content = request.getParameter("content");
+			fos.write(content.getBytes());
+			fos.close();
+			Article article = new Article();
+			article.setAttachment(request.getParameter("attachment"));
+			article.setAuthor(request.getParameter("author"));
+			article.setIsdel(0);
+			article.setLocation(targetFile.getAbsolutePath());
+			article.setTitle(request.getParameter("title"));
 			service.insertArticle(article);
 			data.put("status",StatusConst.SUCCESS);
 		}
