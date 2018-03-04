@@ -1,7 +1,6 @@
 package org.csta.taoke.oa.article.controller;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
@@ -14,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.csta.taoke.oa.article.entity.Article;
 import org.csta.taoke.oa.article.service.ArticleServiceImpl;
+import org.csta.taoke.oa.attachment.entity.Attachment;
 import org.csta.taoke.oa.util.StatusConst;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * 注解 @RequestMapping 定义了匹配的域名路径
  * 
  * 修订版本：
+ * 2018-03-04 附件连带删除
  * 2018-02-07 首次编写
  * 
  * @author 路伟饶
@@ -146,17 +147,22 @@ public class ArticleController {
 //			产生唯一的文件夹名称并创建文件夹
 			path = path.replace("classes/", "articles/"+UUID.randomUUID().toString().toUpperCase()+"/");
 			new File(path).mkdirs();
+//			创建HTML文件
 			File targetFile = new File(path + request.getParameter("title") + ".html");
+//			创建文件输出流
 			FileOutputStream fos = new FileOutputStream(targetFile);
+//			获得文章HTML代码并写入
 			String content = request.getParameter("content");
 			fos.write(content.getBytes());
 			fos.close();
+//			包装文章对象
 			Article article = new Article();
 			article.setAttachment(request.getParameter("attachment"));
 			article.setAuthor(request.getParameter("author"));
 			article.setIsdel(0);
 			article.setLocation(targetFile.getAbsolutePath());
 			article.setTitle(request.getParameter("title"));
+//			执行数据库操作
 			service.insertArticle(article);
 			data.put("status",StatusConst.SUCCESS);
 		}
@@ -207,6 +213,9 @@ public class ArticleController {
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		Map<String, Object> data=new HashMap<String, Object>();
 		try {
+			Attachment attachment = new Attachment();
+			attachment.setId(String.valueOf(article.getAttachment()));
+//			此处应该移除附件，通过GET请求来做。
 			service.removeArticle(article);
 			data.put("status",StatusConst.SUCCESS);
 		}
@@ -232,6 +241,9 @@ public class ArticleController {
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		Map<String, Object> data=new HashMap<String, Object>();
 		try {
+			Attachment attachment = new Attachment();
+			attachment.setId(String.valueOf(article.getAttachment()));
+//			此处应该恢复附件，通过GET请求来做。
 			service.redoArticle(article);
 			data.put("status",StatusConst.SUCCESS);
 		}
@@ -257,6 +269,9 @@ public class ArticleController {
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		Map<String, Object> data=new HashMap<String, Object>();
 		try {
+			Attachment attachment = new Attachment();
+			attachment.setId(String.valueOf(article.getAttachment()));
+//			此处应该删除附件，通过GET请求来做。
 			service.deleteArticle(article);
 			data.put("status",StatusConst.SUCCESS);
 		}

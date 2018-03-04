@@ -32,6 +32,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
  * 注解 @RequestMapping 定义了匹配的域名路径
  * 
  * 修订版本：
+ * 2018-03-04 删除上传过程中的临时文件
  * 2018-02-13 文件上传整合和附件加密整合
  * 2018-02-12 新增文件上传
  * 2018-02-11 新增解密附件功能
@@ -59,11 +60,15 @@ public class AttachmentController {
 	@RequestMapping("/getAttachmentList")
 	public Object getAttachmentList(Attachment attachment,HttpServletRequest request,HttpServletResponse response) 
 			throws UnsupportedEncodingException {
+//		增加响应头，允许跨域访问。
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		Map<String, Object> data=new HashMap<String, Object>();
 		try {
+//			首先获取加密附件列表
 			List<Attachment> attachmentList=service.getAttachmentList(attachment);
+//			通过解密方法得到解密附件列表
 			List<DecryptAttachment> decryptAttachments = decryptAttachmentList(attachmentList);
+//			将解密附件列表返回给前端
 			data.put("number", attachmentList.size());
 			data.put("attachment", decryptAttachments);
 			data.put("status",StatusConst.SUCCESS);
@@ -89,11 +94,15 @@ public class AttachmentController {
 	@RequestMapping("/getAttachmentTrashList")
 	public Object getAttachmentTrashList(Attachment attachment,HttpServletRequest request,HttpServletResponse response) 
 			throws UnsupportedEncodingException {
+//		增加响应头，允许跨域访问。
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		Map<String, Object> data=new HashMap<String, Object>();
 		try {
+//			首先获取加密附件列表
 			List<Attachment> attachmentList=service.getAttachmentTrashList(attachment);
+//			通过解密方法得到解密附件列表
 			List<DecryptAttachment> decryptAttachments = decryptAttachmentList(attachmentList);
+//			将解密附件列表返回给前端
 			data.put("number", attachmentList.size());
 			data.put("attachment", decryptAttachments);
 			data.put("status",StatusConst.SUCCESS);
@@ -119,11 +128,15 @@ public class AttachmentController {
 	@RequestMapping("/getAttachment")
 	public Object getAttachment(Attachment attachment,HttpServletRequest request,HttpServletResponse response) 
 			throws UnsupportedEncodingException {
+//		增加响应头，允许跨域访问。
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		Map<String, Object> data=new HashMap<String, Object>();
 		try {
+//			首先获取加密附件列表
 			List<Attachment> attachmentList=service.getAttachment(attachment);
+//			通过解密方法得到解密附件列表
 			List<DecryptAttachment> decryptAttachments = decryptAttachmentList(attachmentList);
+//			将解密附件列表返回给前端
 			data.put("number", attachmentList.size());
 			data.put("attachment", decryptAttachments);
 			data.put("status",StatusConst.SUCCESS);
@@ -148,19 +161,28 @@ public class AttachmentController {
 	@RequestMapping("/insertAttachment")
 	public Object insertAttachment(HttpServletRequest request,HttpServletResponse response) 
 			throws UnsupportedEncodingException {
+//		增加响应头，允许跨域访问。
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		Map<String, Object> data=new HashMap<String, Object>();
 		try {
+//			获得上传的文件
 			File tempFile = this.receiveUploadFile(request);
+//			创建解密附件列表
 			List<DecryptAttachment> decryptAttachments = new ArrayList<>();
+//			包装解密附件
 			DecryptAttachment decryptAttachment = new DecryptAttachment();
 			decryptAttachment.setName(tempFile.getName());
 			decryptAttachment.setTemplocation(tempFile.getAbsolutePath());
 			decryptAttachments.add(decryptAttachment);
+//			加密这个附件
 			List<Attachment> attachments = encryptAttachmentList(decryptAttachments);
+//			执行数据库操作
 			for (Attachment attachment : attachments) {
 				service.insertAttachment(attachment);
 			}
+//			删除上传过程中的临时文件
+			tempFile.delete();
+//			返回状态相应给前端
 			data.put("status",StatusConst.SUCCESS);
 			data.put("count", attachments.size());
 		}
@@ -262,9 +284,19 @@ public class AttachmentController {
 	@RequestMapping("/deleteAttachment")
 	public Object deleteAttachment(Attachment attachment,HttpServletRequest request,HttpServletResponse response) 
 			throws UnsupportedEncodingException {
+//		增加响应头，允许跨域访问。
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		Map<String, Object> data=new HashMap<String, Object>();
 		try {
+//			先获取附件列表，目的是获取附件的路径
+			List<Attachment> attachments = service.getAttachment(attachment);
+//			从磁盘上删除附件文件
+			for(Attachment a : attachments) {
+				String path = a.getLocation();
+				File encryptFile = new File(path);
+				encryptFile.delete();
+			}
+//			在数据库中删除附件记录
 			service.deleteAttachment(attachment);
 			data.put("status",StatusConst.SUCCESS);
 		}
