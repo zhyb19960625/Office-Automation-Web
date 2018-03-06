@@ -7,6 +7,21 @@ $(document).ready(function() {
 //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
 var ue = UE.getEditor('editor');
 
+function onPreview() {
+	var content = UE.getEditor('editor').getContent();
+	$("#previewContent").html(content);
+}
+
+function onPublish() {
+	var content = UE.getEditor('editor').getContent();
+	var title = $("#titleInput").val();
+	$.post("/Office/article/insertArticle", {
+		content:content,
+		title:title,
+		author:"系统管理员"
+	});
+}
+
 function isFocus(e){
 	alert(UE.getEditor('editor').isFocus());
 	UE.dom.domUtils.preventDefault(e)

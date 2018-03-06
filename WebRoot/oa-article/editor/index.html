@@ -22,23 +22,29 @@
 
 <!-- 主页面代码 -->
         <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
-            <h1>发布文章</h1>
-            
+            <h1>内容发布</h1>	
+            <div class="container">
+    				<label for="titleInput">内容标题</label>
+    				<input class="form-control" id="titleInput" aria-describedby="titleHelp" placeholder="请输入标题内容">
+    				<small id="titleHelp" class="form-text text-muted">内容标题是用户在内容列表中看到的文字</small>
+  			</div>
 <!--             文本编辑器 -->
             <div class="container">
                 <script id="editor" type="text/plain"></script>
             </div>
 <!--             附件上传 -->
-            <form action="/Office/attachment/insertAttachment" enctype="multipart/form-data" method="post">
-                请选择附件：
-                <input type="file" class="form-control form-control-sm" name="file">
-                <br/>
-                <button type="submit" class="btn btn-secondary btn-sm">上传附件</button>
-            </form>
+			<div class="container">
+            		<form action="/Office/attachment/insertAttachment" enctype="multipart/form-data" method="post">
+                		请选择附件：
+                		<input type="file" class="form-control form-control-sm" name="file">
+                		<br/>
+                		<button type="submit" class="btn btn-secondary btn-sm">上传附件</button>
+            		</form>
+            </div>
             
             <div class="container">
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ask-model">保存并发布</button>
-                <button type="button" class="btn btn-primary" onclick="">预览</button>
+                <button type="button" class="btn btn-primary" onclick="onPreview()" data-toggle="modal" data-target="#preview-model" >预览</button>
                 <button type="button" class="btn btn-danger">放弃</button>
             </div>
         </main>
@@ -58,8 +64,8 @@
                     内容已保存，确定要发布内容吗？
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal" onclick="getContent()" data-toggle="modal" data-target="#success-model">确定发布</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal" data-toggle="modal" data-target="#failed-model">返回编辑</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal" onclick="onPublish()">确定发布</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" data-toggle="modal">返回编辑</button>
                 </div>
             </div>
         </div>
@@ -86,21 +92,18 @@
         </div>
     </div>
     
-    <!-- 提示失败 -->
-    <div class="modal fade" id="failed-model" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+    <div class="modal fade bd-example-modal-lg" id="preview-model" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">错误提示</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">内容预览</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    发布内容失败，原因是：unknown error
-                </div>
+                <div id="previewContent" class="modal-body"></div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
                 </div>
             </div>
         </div>

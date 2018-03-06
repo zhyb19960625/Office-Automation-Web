@@ -12,7 +12,7 @@ import org.csta.taoke.oa.common.DateTimeTools;
  * 2018-01-03 首次编写
  * 
  * @author 路伟饶
- *
+ * 
  */
 public class Article {
 //	文章ID，由数据库自动生成，一般不需要设置
@@ -67,7 +67,11 @@ public class Article {
 		return attachment;
 	}
 	public void setAttachment(String attachment) {
-		this.attachment = Long.valueOf(attachment);
+		if ( attachment==null || attachment.equals("")) {
+			this.attachment = 0;
+		} else {
+			this.attachment = Long.valueOf(attachment);
+		}
 	}
 	public int getIsdel() {
 		return isdel;
