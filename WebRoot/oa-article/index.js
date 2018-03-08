@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	onLoad();
 	$("#bar").load("/Office/bar.html", function() {
-		$("#announcement").addClass("active", function() {});
+		$("#listArticle").addClass("active", function() {});
 	});
 });
 
@@ -19,4 +19,8 @@ function onLoad() {
 function getTableLine(perline,no) {
 	var trLine = "<tr><td>"+no+"</td><td>"+perline.title+"</td><td>"+perline.author+"</td><td>"+perline.createtime+"</td><td></td></tr>"
 	return trLine;
+}
+
+function createArticle() {
+	window.location.href = "/Office/oa-article/editor/?new=true"
 }

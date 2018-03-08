@@ -19,6 +19,12 @@ function onPublish() {
 		title:title,
 		content:content,
 		author:"系统管理员"
+	},function(result) {
+		if (result.status == 1) {
+			alert("发布成功");
+		} else {
+			alert("发布失败");
+		}
 	});
 }
 
@@ -30,7 +36,17 @@ function onEdit(id) {
 		title:title,
 		content:content,
 		author:"系统管理员"
+	},function(result) {
+		if (result.status == 1) {
+			alert("发布成功");
+		} else {
+			alert("发布失败");
+		}
 	});
+}
+
+function onExit() {
+	window.location.href = "/Office/oa-article/"
 }
 
 function isFocus(e){
