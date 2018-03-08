@@ -38,7 +38,7 @@
 		name = #{name},
 		location = #{location},
 		type = #{type},
-		keyentry = #{keyentry} 
+		keyentry = #{keyentry}
 		where isdel = 0 and 
 		id = (select attachment from office.article where isdel = 0 and id = #{id});
 	</update>

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.csta.taoke.oa.article.entity.Article;
 import org.csta.taoke.oa.article.service.ArticleServiceImpl;
 import org.csta.taoke.oa.attachment.entity.Attachment;
+import org.csta.taoke.oa.common.entity.Config;
 import org.csta.taoke.oa.util.StatusConst;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * 注解 @RequestMapping 定义了匹配的域名路径
  * 
  * 修订版本：
+ * 2018-03-08 修改返回给前端的路径为Web路径
+ * 2018-03-06 文章存储
  * 2018-03-04 附件连带删除
  * 2018-02-07 首次编写
  * 
@@ -58,6 +61,9 @@ public class ArticleController {
 		try {
 //			执行数据库操作
 			List<Article> articleList=service.getArticleList(article);
+			for (Article per : articleList) {
+				per.setLocation(ArticleController.getWebPath(per.getLocation()));
+			}
 			data.put("number", articleList.size());
 			data.put("article", articleList);
 			data.put("status",StatusConst.SUCCESS);
@@ -86,6 +92,9 @@ public class ArticleController {
 		Map<String, Object> data=new HashMap<String, Object>();
 		try {
 			List<Article> articleList=service.getArticleTrashList(article);
+			for (Article per : articleList) {
+				per.setLocation(ArticleController.getWebPath(per.getLocation()));
+			}
 			data.put("number", articleList.size());
 			data.put("article", articleList);
 			data.put("status",StatusConst.SUCCESS);
@@ -114,6 +123,9 @@ public class ArticleController {
 		Map<String, Object> data=new HashMap<String, Object>();
 		try {
 			List<Article> articleList=service.getArticle(article);
+			for (Article per : articleList) {
+				per.setLocation(ArticleController.getWebPath(per.getLocation()));
+			}
 			data.put("number", articleList.size());
 			data.put("article", articleList);
 			data.put("status",StatusConst.SUCCESS);
@@ -145,23 +157,25 @@ public class ArticleController {
 			String path = Thread.currentThread().getContextClassLoader().getResource("").toString();
 			path = path.replace("file:", "");
 //			产生唯一的文件夹名称并创建文件夹
-			path = path.replace("classes/", "articles/"+UUID.randomUUID().toString().toUpperCase()+"/");
+			path = path.replace("WEB-INF/classes/", "oa-content/article/"+UUID.randomUUID().toString().toUpperCase()+"/");
 			new File(path).mkdirs();
 //			创建HTML文件
 			File targetFile = new File(path + request.getParameter("title") + ".html");
 //			创建文件输出流
 			FileOutputStream fos = new FileOutputStream(targetFile);
 //			获得文章HTML代码并写入
-			String content = request.getParameter("content");
-			fos.write(content.getBytes());
+//			写入HTML头部，指定编码为UTF-8。
+			fos.write("<head><meta charset=\"UTF-8\"></head>".getBytes());
+			fos.write(request.getParameter("content").getBytes());
+			fos.flush();
 			fos.close();
 //			包装文章对象
 			Article article = new Article();
-			article.setAttachment(request.getParameter("attachment"));
-			article.setAuthor(request.getParameter("author"));
-			article.setIsdel(0);
-			article.setLocation(targetFile.getAbsolutePath());
 			article.setTitle(request.getParameter("title"));
+			article.setAuthor(request.getParameter("author"));
+			article.setLocation(targetFile.getAbsolutePath());
+			article.setAttachment(request.getParameter("attachment"));
+			article.setIsdel(0);
 //			执行数据库操作
 			service.insertArticle(article);
 			data.put("status",StatusConst.SUCCESS);
@@ -183,12 +197,24 @@ public class ArticleController {
 	 */
 	@ResponseBody
 	@RequestMapping("/updateArticle")
-	public Object updateArticle(Article article,HttpServletRequest request,HttpServletResponse response) 
+	public Object updateArticle(HttpServletRequest request,HttpServletResponse response) 
 			throws UnsupportedEncodingException {
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		Map<String, Object> data=new HashMap<String, Object>();
 		try {
-			service.updateArticle(article);
+			Article article = new Article();
+			article.setId(request.getParameter("id"));
+			List<Article> articleList = service.getArticle(article);
+			for(Article per : articleList) {
+				per.setTitle(request.getParameter("title"));
+				FileOutputStream fos = new FileOutputStream(per.getLocation());
+				fos.write("<head><meta charset=\"UTF-8\"></head>".getBytes());
+				fos.write(request.getParameter("content").getBytes());
+				fos.flush();
+				fos.close();
+				per.setAttachment(request.getParameter("attachment"));
+				service.updateArticle(per);
+			}
 			data.put("status",StatusConst.SUCCESS);
 		}
 		catch(Exception e) {
@@ -280,5 +306,13 @@ public class ArticleController {
 			data.put("status",StatusConst.ERROR);
 		}
 		return data;
+	}
+	/**
+	 * 将本地磁盘路径转换为Web路径（http形式）
+	 * @param localpath 本地磁盘路径
+	 * @return Web路径
+	 */
+	public static String getWebPath(String localpath) {
+		return new StringBuffer(Config.ROOT).append(localpath.split("/Office/")[1]).toString();
 	}
 }

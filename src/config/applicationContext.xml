@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="GBK"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns="http://www.springframework.org/schema/beans" 
 	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
@@ -9,30 +9,30 @@
 						http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
 						http://www.springframework.org/schema/context   
 					    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
-	<!-- dataSource ÅäÖÃ -->
+	<!-- dataSource é…ç½® -->
 	<bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		
-		<!-- Ð£ÄÚÍøÊý¾Ý¿â -->
-		<!-- <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://db.cstacauc.cn?useSSL=true" />  -->
-		
-		<!-- ¹«ÍøÊý¾Ý¿â -->
+		<!-- å­¦æ ¡å±€åŸŸç½‘æ•°æ®åº“ -->
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://sc.xiaolus.cn?useSSL=true"/>
+		<property name="url" value="jdbc:mysql://db.cstacauc.cn?useSSL=true" />
+		
+		<!-- å…¬ç½‘æ•°æ®åº“ -->
+		<!-- <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://sc.xiaolus.cn?useSSL=true"/> -->
 		
 		<property name="username" value="root" /> 
 		<property name="password" value="XiaoLuMARIADB01291219" /> 
 	</bean>
 	
-	<!-- É¨ÃèËùÓÐmapperÎÄ¼þ -->
+	<!-- æ‰«ææ‰€æœ‰mapperæ–‡ä»¶ -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="myDataSource" />
-		<property name="configLocation" value="classpath:spring_config/sqlMapConfig.xml" />
+		<property name="configLocation" value="classpath:config/sqlMapConfig.xml" />
 		<property name="mapperLocations" value="classpath:org/csta/taoke/oa/*/dao/*.xml" />
 	</bean>
 	
-	<!-- springÓëmybatisÕûºÏÅäÖÃ£¬É¨ÃèËùÓÐdao -->
+	<!-- springä¸Žmybatisæ•´åˆé…ç½®ï¼Œæ‰«ææ‰€æœ‰dao -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="org.csta.taoke.oa" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
@@ -41,9 +41,9 @@
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="defaultEncoding" value="utf-8"/>
 	</bean>
-	<!-- È«¾Ö³£Á¿³õÊ¼»¯ÅäÖÃÎÄ¼þ -->
+	<!-- å…¨å±€å¸¸é‡åˆå§‹åŒ–é…ç½®æ–‡ä»¶ -->
 	<bean class="org.csta.taoke.oa.common.entity.Config" scope="singleton"
 		lazy-init="false" init-method="initConfig">
-		<property name="path" value="/spring_config/config.properties" />
+		<property name="path" value="/config/config.properties" />
 	</bean>
 </beans>

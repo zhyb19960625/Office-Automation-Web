@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.csta.taoke.oa.attachment.entity.Attachment;
 import org.csta.taoke.oa.attachment.entity.DecryptAttachment;
 import org.csta.taoke.oa.attachment.service.AttachmentServiceImpl;
+import org.csta.taoke.oa.common.entity.Config;
 import org.csta.taoke.oa.security.CryptoCore;
 import org.csta.taoke.oa.security.KeyStoreManager;
 import org.csta.taoke.oa.util.StatusConst;
@@ -32,6 +33,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
  * 注解 @RequestMapping 定义了匹配的域名路径
  * 
  * 修订版本：
+ * 2018-03-08 修改返回给前端的路径为Web路径
  * 2018-03-04 删除上传过程中的临时文件
  * 2018-02-13 文件上传整合和附件加密整合
  * 2018-02-12 新增文件上传
@@ -68,6 +70,9 @@ public class AttachmentController {
 			List<Attachment> attachmentList=service.getAttachmentList(attachment);
 //			通过解密方法得到解密附件列表
 			List<DecryptAttachment> decryptAttachments = decryptAttachmentList(attachmentList);
+			for (DecryptAttachment per : decryptAttachments) {
+				per.setTemplocation(AttachmentController.getWebPath(per.getTemplocation()));
+			}
 //			将解密附件列表返回给前端
 			data.put("number", attachmentList.size());
 			data.put("attachment", decryptAttachments);
@@ -102,6 +107,9 @@ public class AttachmentController {
 			List<Attachment> attachmentList=service.getAttachmentTrashList(attachment);
 //			通过解密方法得到解密附件列表
 			List<DecryptAttachment> decryptAttachments = decryptAttachmentList(attachmentList);
+			for (DecryptAttachment per : decryptAttachments) {
+				per.setTemplocation(AttachmentController.getWebPath(per.getTemplocation()));
+			}
 //			将解密附件列表返回给前端
 			data.put("number", attachmentList.size());
 			data.put("attachment", decryptAttachments);
@@ -136,6 +144,9 @@ public class AttachmentController {
 			List<Attachment> attachmentList=service.getAttachment(attachment);
 //			通过解密方法得到解密附件列表
 			List<DecryptAttachment> decryptAttachments = decryptAttachmentList(attachmentList);
+			for (DecryptAttachment per : decryptAttachments) {
+				per.setTemplocation(AttachmentController.getWebPath(per.getTemplocation()));
+			}
 //			将解密附件列表返回给前端
 			data.put("number", attachmentList.size());
 			data.put("attachment", decryptAttachments);
@@ -176,6 +187,7 @@ public class AttachmentController {
 			decryptAttachments.add(decryptAttachment);
 //			加密这个附件
 			List<Attachment> attachments = encryptAttachmentList(decryptAttachments);
+//			List<Long> ids = new ArrayList<>();
 //			执行数据库操作
 			for (Attachment attachment : attachments) {
 				service.insertAttachment(attachment);
@@ -309,7 +321,7 @@ public class AttachmentController {
 	
 	/**
 	 * 接收上传的文件
-	 * 上传文件临时存储于 /WEB-INF/uploads/随机唯一UUID值/ 中
+	 * 上传文件临时存储于 /oa-content/uploads/随机唯一UUID值/ 中
 	 * @param request HTTP请求对象
 	 * @return 存储的上传临时文件
 	 * @throws Exception
@@ -323,7 +335,7 @@ public class AttachmentController {
 		String path = Thread.currentThread().getContextClassLoader().getResource("").toString();
 		path = path.replace("file:", "");
 //		产生唯一的文件夹名称并创建文件夹
-		path = path.replace("classes/", "uploads/"+UUID.randomUUID().toString().toUpperCase()+"/");
+		path = path.replace("WEB-INF/classes/", "oa-content/uploads/"+UUID.randomUUID().toString().toUpperCase()+"/");
 		new File(path).mkdirs();
 		File targetFile = new File(path + multipartFile.getOriginalFilename());
 //		写入文件
@@ -333,7 +345,7 @@ public class AttachmentController {
 	
 	/**
 	 * 加密附件列表
-	 * 加密后的附件存储于 /WEB-INF/attachments/随机唯一UUID值/ 中
+	 * 加密后的附件存储于 /oa-content/attachments/随机唯一UUID值/ 中
 	 * 该随机唯一UUID值同时也是密钥在密钥库的入口名称
 	 * 生成密钥所用的密码来源于另一个随机唯一UUID值
 	 * 密钥库是 /WEB-INF/security/KeyStoreCenter.keystore
@@ -346,7 +358,7 @@ public class AttachmentController {
 		String path = Thread.currentThread().getContextClassLoader().getResource("").toString();
 		path = path.replace("file:", "");
 //		得到加密附件存储路径
-		String attachmentPath = path.replace("classes/", "attachments/");
+		String attachmentPath = path.replace("WEB-INF/classes/", "oa-content/attachments/");
 //		检查加密附件存储路径是否已经创建
 		File attachmentPathFile = new File(attachmentPath);
 		if (!attachmentPathFile.exists() && !attachmentPathFile.isDirectory()) {
@@ -385,10 +397,10 @@ public class AttachmentController {
 //			存储加密所用的密钥，而IV存储于文件本体当中
 			manager.saveSymmetricKey(key, keyEntryString);
 			Attachment attachment = new Attachment();
-			attachment.setKeyentry(keyEntryString);
-			attachment.setLocation(outputFile.getAbsolutePath());
 			attachment.setName(outputFile.getName());
 			attachment.setType("Normal");
+			attachment.setKeyentry(keyEntryString);
+			attachment.setLocation(outputFile.getAbsolutePath());
 			attachments.add(attachment);
 		}
 		return attachments;
@@ -396,7 +408,7 @@ public class AttachmentController {
 	
 	/**
 	 * 解密附件列表
-	 * 解密后的临时文件存储于 /oa-download/随机唯一UUID值/ 中
+	 * 解密后的临时文件存储于 /oa-content/随机唯一UUID值/ 中
 	 * 密钥库是 /WEB-INF/security/KeyStoreCenter.keystore
 	 * @param attachments 密文附件列表
 	 * @return 明文附件列表
@@ -427,7 +439,7 @@ public class AttachmentController {
 //			获得源附件文件
 			File sourceFile = new File(attachment.getLocation());
 //			获得下载路径并创建
-			String dlPath = path.replace("WEB-INF/security/", "oa-download/" + UUID.randomUUID().toString() + "/");
+			String dlPath = path.replace("WEB-INF/classes/", "oa-content/downloads/" + UUID.randomUUID().toString() + "/");
 			new File(dlPath).mkdirs();
 //			创建输出文件对象
 			File outputFile = new File(dlPath + attachment.getName());
@@ -440,5 +452,14 @@ public class AttachmentController {
 			decryptAttachments.add(decryptAttachment);
 		}
 		return decryptAttachments;
+	}
+	
+	/**
+	 * 将本地磁盘路径转换为Web路径（http形式）
+	 * @param localpath 本地磁盘路径
+	 * @return Web路径
+	 */
+	public static String getWebPath(String localpath) {
+		return new StringBuffer(Config.ROOT).append(localpath.split("/Office/")[1]).toString();
 	}
 }

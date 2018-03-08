@@ -49,9 +49,9 @@ public class StudentTableService {
 //				反射中的警告，null参数应该替换为空Class类型
 //				但是我之前用还有问题，先这样写，不影响运行
 //				我再研究研究反射再说
-				Method getMethod = student.getClass().getDeclaredMethod(new StringBuilder("get").append(fieldName).toString(), null);
+				Method getMethod = student.getClass().getDeclaredMethod(new StringBuilder("get").append(fieldName).toString(), Class[].class);
 //				通过反射调用get方法
-				Object result = getMethod.invoke(student, null);
+				Object result = getMethod.invoke(student, Object[].class);
 				statement.setObject(i, result);
 			}
 			return statement.executeUpdate();

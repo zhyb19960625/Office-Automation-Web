@@ -15,6 +15,7 @@ import org.csta.taoke.oa.importer.StudentInfoImporter;
  * @author 路伟饶
  *
  */
+@Deprecated
 public class TestMain {
 
 	public static void main(String[] args) throws Exception {

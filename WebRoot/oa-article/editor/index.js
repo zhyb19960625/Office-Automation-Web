@@ -16,8 +16,19 @@ function onPublish() {
 	var content = UE.getEditor('editor').getContent();
 	var title = $("#titleInput").val();
 	$.post("/Office/article/insertArticle", {
-		content:content,
 		title:title,
+		content:content,
+		author:"系统管理员"
+	});
+}
+
+function onEdit(id) {
+	var content = UE.getEditor('editor').getContent();
+	var title = $("#titleInput").val();
+	$.post("/Office/article/updateArticle", {
+		id:id,
+		title:title,
+		content:content,
 		author:"系统管理员"
 	});
 }

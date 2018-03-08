@@ -2,8 +2,6 @@ package org.csta.taoke.oa.entity;
 
 import java.sql.Date;
 
-import org.csta.taoke.oa.common.DateTimeTools;
-
 /**
  * 功能：
  * 学生信息数据模型
@@ -93,8 +91,8 @@ public class Student {
 	public Date getBirthday() {
 		return birthday;
 	}
-	public void setBirthday(String birthday) {
-		this.birthday = DateTimeTools.conventDateStringToObject(birthday, "-");
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
 	}
 	public String getPoc() {
 		return poc;

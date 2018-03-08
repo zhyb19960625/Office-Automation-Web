@@ -16,6 +16,7 @@ public class DecryptAttachment {
 	private String name;
 //	附件的临时下载地址
 	private String templocation;
+	
 	public long getId() {
 		return id;
 	}

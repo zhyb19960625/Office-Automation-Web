@@ -18,6 +18,7 @@ import org.csta.taoke.oa.service.StudentTableService;
  * @author 路伟饶
  *
  */
+@Deprecated
 public class StudentInfoImporter {
 	private Connection connection;
 	private ExcelFileSolver solver;
