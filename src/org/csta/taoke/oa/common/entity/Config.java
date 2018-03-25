@@ -7,7 +7,7 @@ import java.util.Properties;
 public class Config {
 	private static String path;
 	private static final Properties PROP=new Properties();
-	public static String ROOT;
+	public static String ROOT,CONTENT;
 	private Config() {
 		String path = Thread.currentThread().getContextClassLoader().getResource("").toString();
 		path = path.replace("file:", "");
@@ -18,6 +18,7 @@ public class Config {
 		InputStream inputStream=Config.class.getResourceAsStream(path);
 		PROP.load(inputStream);
 		ROOT=PROP.getProperty("root");
+		CONTENT=PROP.getProperty("contentPath");
 		System.out.println(ROOT);
 	}
 	public static String getPath() {
